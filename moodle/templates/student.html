@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}{{pk}}{% endblock title %}
+{% block content %}
+{% if user.is_authenticated %}
+<h2>Course {{pk}}</h2>
+    <h3><a href="{% url 'allannouncements' pk %}">All announcements made till now</a></h3>
+    <h3>Your Course total till now : <B><font color = 'red'>{{coursetotal}}</font></B></h3>
+    <h3>Percentage Course completed total till now : <B><font color = 'red'>{{percentcompleted}}</font></B></h3>
+    {% for assignment in assignments %}
+    <a href="{% url 'viewassignment' pk assignment.title %}">{{assignment}}</a><br>
+    {% empty %}
+    <p>No assignments.</p>
+    {% endfor %}
+<p><a href="{% url 'home' %}"> Go to Home page </a></p>
+{% else %}
+<h2>Please <a href="{% url 'login' %}">Log In</a> or <a href="{% url 'signup' %}">Sign Up</a> </h2>
+{% endif %}
+{% endblock content %}
+

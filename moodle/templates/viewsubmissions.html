@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Submissions{% endblock title %}
+{% block content %}
+{% if user.is_authenticated %}
+<h2>Submissions for {{ak}} </h2>
+<h3>{{ak}}  Statistics:</h3>
+<h4>Mean: {{mean}}</h4>
+<h4>Variance: {{variance}}</h4>
+Histogram: <img src="data:image/png;base64,{{ data }}" alt="" height="250" ,width="250">
+<br>
+    <p> Upload a ".csv" file in the format "student-name,marks,feedback" if you wish to upload marks of all students at once by clicking
+        <a href="{% url 'uploadmarks' pk ak %}">here</a><br>
+    </p>
+    {% for submission in submissions %}
+    Student Name : {{submission.student.username}}<br><br>
+    File : <a href="/media/{{submission.file}}">{{submission.file}}</a>
+    <br><br>
+    Graded or Not : {{submission.status}}
+    <br><br>
+    Feedback : {{submission.feedback}}<br><br>
+    <a href="{% url 'feedback' pk ak submission.student.username %}"><button type="submit">Update</button>
+    <br><br>
+    {% empty %}
+    <p>No submissions.</p>
+    {% endfor %}
+    <p><a href="{% url 'home' %}"> Go to Home page </a></p>
+{% else %}
+<h2>Please <a href="{% url 'login' %}">Log In</a> or <a href="{% url 'signup' %}">Sign Up</a> </h2>
+{% endif %}
+{% endblock content %}

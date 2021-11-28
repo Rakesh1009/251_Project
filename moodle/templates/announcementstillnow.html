@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}{{name}}{% endblock title %}
+{% block content %}
+{% if user.is_authenticated %}
+<h2>Course {{name}} <br> Announcements made till now</h2>
+    {% for ann in allannouncements %}
+    <p>
+    <h3><B><font color = 'red'></font></B> {{ann.title}}</h3>
+    <h4><B><font color = 'red'></font></B>  {{ann.announcement}} <br><br></h4></p>
+    {% empty %}
+    <p>No Announcements made yet.</p>
+    {% endfor %}
+{% else %}
+<h2>Please <a href="{% url 'login' %}">Log In</a> or <a href="{% url 'signup' %}">Sign Up</a> </h2>
+{% endif %}
+{% endblock content %}

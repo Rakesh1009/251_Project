@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+<body>
+  {% block content %}
+  <div class="signup">
+    <h2>Signup with Float Moodle</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-primary" type="submit">Sign Up</button>
+    </form>
+  </div>
+  <p><a href="{% url 'home' %}"> Go to Home page </a></p>
+  {% endblock %}
+</body>

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %} Assignment{% endblock title %}
+{% block content %}
+{% if user.is_authenticated %}
+<h2>Submission for {{assignment.title}}</h2>
+Title : {{assignment.title}}    <br>
+Description : {{assignment.description}}    <br>
+Maximum Marks: {{assignment.maxmarks}}  <br>
+Weightage: {{assignment.weightage}}  <br>
+Deadline:{{assignment.end_date}} at {{assignment.end_time}} <br>
+View:
+<a href="/media/{{assignment.file}}"> File for {{assignment.title}}</a>
+<br><br>
+    {% if assignment.is_end_date %}
+        {% if assignment.is_today %}
+            {% if assignment.is_time %}
+                Hurry!, assignment is due today! <br><br>
+                Submit your response below:
+                    <form method="post" enctype="multipart/form-data">
+                       {% csrf_token %}
+                         {{form.as_p}}
+                              <button type="submit">Submit</button>
+                              </form>
+                              <br><br>
+            {% else %}
+                    Cannot make submission <br><br>
+                    Assignment was due today!    
+            {% endif %}
+        {% else %}
+            Submit your response below:
+            <form method="post" enctype="multipart/form-data">
+               {% csrf_token %}
+                 {{form.as_p}}
+                      <button type="submit">Submit</button>
+                      </form>
+                      <br><br>
+        {% endif %}
+    {% else %}
+                Cannot make submission <br><br>
+                Assignment was due on {{assignment.end_date}}
+    {% endif %}
+
+    <p><a href="{% url 'home' %}"> Go to Home page </a></p>
+{% else %}
+<h2>Please <a href="{% url 'login' %}">Log In</a> or <a href="{% url 'signup' %}">Sign Up</a> </h2>
+{% endif %}
+
+{% endblock content %}

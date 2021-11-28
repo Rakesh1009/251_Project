@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %} Assignment{% endblock title %}
+{% block content %}
+{% if user.is_authenticated %}
+<h2>Submission for {{assignment.name}}</h2>
+Title : {{assignment.title}}    <br>
+Description : {{assignment.description}}    <br>
+Maximum Marks: {{assignment.maxmarks}}  <br>
+Weightage: {{assignment.weightage}}  <br>
+<a href="/media/{{assignment.file}}">View {{assignment.file}}</a>
+<br><br>
+<h3>Your Response</h3>
+Submitted file : <a href="/media/{{mysubmission.file}}">{{mysubmission.file}}</a> <br>
+Status: {{mysubmission.status}} <br>
+Obtained Marks : {{mysubmission.obtainedmarks}} <br>
+Feedback : {{mysubmission.feedback}}
+{% else %}
+<h2>Please <a href="{% url 'login' %}">Log In</a> or <a href="{% url 'signup' %}">Sign Up</a> </h2>
+{% endif %}
+<p><a href="{% url 'home' %}"> Go to Home page </a></p>
+{% endblock content %}

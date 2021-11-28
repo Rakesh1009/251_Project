@@ -1,0 +1,36 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <h2>Welcome to Float Moodle</h2>
+  Hi {{ user.username }}!
+  <p><a href="{% url 'logout' %}">Log Out</a></p>
+  <p><a href="{% url 'signup' %}">Create new account</a></p>
+  <p><a href="{% url 'editprofile' %}">Edit Profile</a></p>
+  <p><a href="{% url 'password_reset' %}">Reset password via email</a></p>
+  <p><a href="{% url 'createcourse' %}">Create Course</a></p>
+  <p><a href="{% url 'joincourse' %}">Join Course</a></p>
+  <p><a href="{% url 'coursesasinstructor' %}">Courses as Instructor</a></p>
+  <p><a href="{% url 'coursesundertaken' %}">Courses Undertaken</a></p>
+  <p><a href="{% url 'joinasta' %}">Join Course as TA</a></p>
+  <p><a href="{% url 'coursesasta' %}">Courses as TA</a></p>
+
+  To-Do:<br>
+  Assignments that are due:
+  {% for ass in assign_list %}
+  <br><br>
+  <a href="{% url 'viewassignment' ass.course ass.title %}">{{ass.title}}</a> from the course:  <a href="{% url 'student' ass.course %}">{{ass.course}}</a>
+  {% empty %}
+  <br><br>
+  No assignments due!
+  {% endfor %}
+{% else %}
+  <h2>Welcome to Float Moodle</h2>
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a>
+  <a href="{% url 'signup' %}">Sign Up</a>
+{% endif %}
+{% endblock %}

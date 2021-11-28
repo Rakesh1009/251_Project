@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Creating Assignment{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <h2 class="my-4"> Course {{course.name}} <br> Add an Assignment </h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label>Assignment Title:</label>
+    {{ form.title }} 
+    <br><br>
+    <label>Assignment Weightage:</label>
+    {{ form.weightage }}
+    <br><br>
+    <label>Assignment Maximum Marks:</label>
+    {{ form.maxmarks }} 
+    <br><br>
+    <label>Assignment Description:</label>
+    {{ form.description }}
+    <br><br>
+    <label>Deadline:</label>
+    {{ form.end_date }} 
+    at {{form.end_time}}
+    <br><br>
+    <label>Upload Assignment File:</label>
+    {{ form.file }}
+    <br><br>
+    {{form.end}}
+        <button type="submit">Submit</button>
+  </form>
+  <p><a href="{% url 'home' %}"> Go to Home page </a></p>
+  {% else %}
+    <h2>Please <a href="{% url 'login' %}">Log In</a> or <a href="{% url 'signup' %}">Sign Up</a> </h2>
+{% endif %}
+{% endblock %}

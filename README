@@ -1,0 +1,22 @@
+------------------------------------------------------------README---------------------------------------------------------------------------
+--This is the README file for the float moodle project/website of Rakesh Kumar(200050120) Guduru Manoj(200050044) Anish Makam(200050069) Deeti Yeshash Chandra(200050031)--
+We have made the website using the Django framework 
+The virtual environment to run the website locally on your machine is present in the outlab-env folder
+To activate the virtual environment on your machine run: (this environment is for only for the unix distro)
+source outlab-env/bin/active
+Run the above command in the directory where the environment folder is present
+After the environment is set up, run:
+cd moodle/
+to go the next directory
+Next run:
+python3 manage.py runserver
+Since the website is not deployed, the url http://127.0.0.1:8000/ open the website
+However the virtual environment required for other os are different
+So are the commands
+---------------------------------------------------------------------------------------------------------------------------------------------
+If there is no database file in the moodle folder then, run the following commands:
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py runserver
+This will create the new database (we have opted to use the sqlite3 default database in the settings.py)
+---------------------------------------------------------------------------------------------------------------------------------------------

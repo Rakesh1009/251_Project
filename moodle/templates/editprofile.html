@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Edit Profile{% endblock title %}
+{% block content %}
+{% if user.is_authenticated %}
+<h2>Edit Profile</h2>
+  <p><a href="{% url 'change_password' %}">Change Password</a></p>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+                    <label>First Name:</label>
+                        {{ user_form.first_name }} 
+                        <br>
+                    <label>Last Name:</label>
+                        {{ user_form.last_name }}
+                        <br>
+                    <label>Email:</label>
+                        {{ user_form.email }}
+        <br><br>
+        <button type="submit" >Save Changes</button>
+        <button type="reset" >Reset</button>
+    </form>
+    <p><a href="{% url 'home' %}"> Go to Home page </a></p>
+{% else %}
+<h2>Please <a href="{% url 'login' %}">Log In</a> or <a href="{% url 'signup' %}">Sign Up</a> </h2>
+{% endif %}
+{% endblock content %}

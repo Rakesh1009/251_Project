@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Join Course{% endblock title %}
+{% block content %}
+{% if user.is_authenticated %}
+<h2>Add TA constraints for {{course}}</h2>
+<h3>Note that "one" implies the TA will have same powers as the instructor, i.e, he/she can create assignments and evaluate the submissions 
+    <br> "two" implies he/she can only evaluate submissions and cannot create an assignment but can post announcements
+</h3>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+                    <label>Power of TA:</label>
+                        {{ form.power }} 
+                        <br><br>
+                    <label>TA Code:</label>
+                        {{ form.tacode }}
+        <br><br>
+        <button type="submit" >Create</button>
+        <button type="reset" >Reset</button>
+    </form>
+{% else %}
+<h2>Please <a href="{% url 'login' %}">Log In</a> or <a href="{% url 'signup' %}">Sign Up</a> </h2>
+{% endif %}
+{% endblock content %}

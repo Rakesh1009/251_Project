@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Announcement{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <h2 class="my-4"> Course {{course.name}} <br> Post an announcement </h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label>Announcement Title:</label>
+    {{ form.title }} <br> <br>
+    <label>Assignment Description:</label>
+    {{ form.announcement }}
+    <br><br>
+        <button type="submit">Post</button>
+  </form>
+  {% else %}
+    <h2>Please <a href="{% url 'login' %}">Log In</a> or <a href="{% url 'signup' %}">Sign Up</a> </h2>
+{% endif %}
+{% endblock %}

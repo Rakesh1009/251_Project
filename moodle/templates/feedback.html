@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Create Course{% endblock title %}
+{% block content %}
+{% if user.is_authenticated %}
+<h2>Feedback </h2> <br>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+<p><a href="{% url 'home' %}"> Go to Home page </a></p>
+{% else %}
+<h2>Please <a href="{% url 'login' %}">Log In</a> or <a href="{% url 'signup' %}">Sign Up</a> </h2>
+{% endif %}
+{% endblock content %}

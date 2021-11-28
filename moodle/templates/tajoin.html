@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Join Course{% endblock title %}
+{% block content %}
+{% if user.is_authenticated %}
+<h2>Join Course as TA</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+                    <label>Name of the Course:</label>
+                        {{ form.name }} 
+                        <br><br>
+                    <label>Course Code:</label>
+                        {{ form.coursecode }}
+                        <br><br>
+                        <label>TA Code:</label>
+                            {{ form.tacode }}
+        <br><br>
+        <button type="submit" >Join</button>
+        <button type="reset" >Reset</button>
+    </form>
+{% else %}
+<h2>Please <a href="{% url 'login' %}">Log In</a> or <a href="{% url 'signup' %}">Sign Up</a> </h2>
+{% endif %}
+{% endblock content %}

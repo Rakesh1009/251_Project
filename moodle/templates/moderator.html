@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}{{name}}{% endblock title %}
+{% block content %}
+{% if user.is_authenticated %}
+<h2>Course {{name}} <br>
+    {% if power == "one" %}
+        <a href="{% url 'uploadassignment' name %}">Create new Assignment</a></h2>
+    {% endif %}
+    <h2><a href="{% url 'postannouncement' name %}">Post an Announcement</a></h2>
+    <h3><a href="{% url 'allannouncements' name %}">All announcements made till now</a></h3>
+    {% for assignment in assignments %}
+    <a href="{% url 'viewsubmissions' name assignment.title %}">{{assignment.title}}</a><br>
+    {% empty %}
+    <p>No assignments.</p>
+    {% endfor %}
+{% else %}
+<h2>Please <a href="{% url 'login' %}">Log In</a> or <a href="{% url 'signup' %}">Sign Up</a> </h2>
+{% endif %}
+{% endblock content %}
